@@ -10,8 +10,10 @@ import UIKit
 private let kADViewHeight = 150
 
 public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
-    public typealias ADDidClick = (Int) -> Void
-    public var imageDidClick:ADDidClick?
+    public typealias ADDidClickClosure = (Int) -> Void
+    public typealias ADViewLoadImageClosure = (UIImageView,ImageType) -> Void
+    public var imageDidClick:ADDidClickClosure?
+    public var loadImage:ADViewLoadImageClosure?
     public var images = [ImageType]() {
         didSet {
             pageControl.numberOfPages = images.count
@@ -106,11 +108,8 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
             imageView.userInteractionEnabled = true
             imageView.clipsToBounds = true
             scrollView.addSubview(imageView)
-            //            //TODO  ADView 加载数据在这里
-            //            //          设置数据
-            if let imageUrl = currentImageArray[i] as? String {
-                imageView.image = UIImage(named: imageUrl)
-            }
+            // 将加载图片的内容放给外部   专业无论你说直接加载 还是各种第三方库都能            
+            loadImage?(imageView,currentImageArray[i])
             let tap = UITapGestureRecognizer(target: self, action: Selector("tapImage"))
             imageView.addGestureRecognizer(tap)
         }

@@ -22,6 +22,10 @@ class ViewController: UIViewController {
             print("第\(index)张图片被点击了")
             
         }
+        adView.loadImage = { ( imageView:UIImageView,imageName:String) in
+            imageView.image = UIImage(named: imageName)
+            // or  use Other Modules              
+        }
     
     }
     
