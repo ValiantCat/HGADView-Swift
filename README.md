@@ -6,6 +6,7 @@ Swift版轮播器
 
 1 到导入项目 将HGADView拖进项目即可  
 2 初始化  如下
+
       let adView = HGADView<String>(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 200))
            view.addSubview(adView)
            let images = ["1","2","3"]
@@ -15,6 +16,7 @@ Swift版轮播器
                print("第\(index)张图片被点击了")
             
             }
+
 
 3 Demo见下图
 ![demo](https://github.com/aiqiuqiu/HGADView-Swift/blob/master/demo.gif)
