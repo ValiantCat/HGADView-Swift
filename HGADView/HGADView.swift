@@ -25,7 +25,7 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
     
     private var currentImageArray = [ImageType]()
     private var currentPage = 0
-  
+    
     private var timer:NSTimer?
     private lazy var scrollView:UIScrollView = {
         
@@ -72,7 +72,7 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
     }
     override init (frame: CGRect) {
         super.init(frame: frame)
-
+        
         addSubview(scrollView)
         addSubview(pageControl)
         
@@ -86,7 +86,8 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
     
     deinit {
         scrollView.delegate = nil
-        
+        timer?.invalidate()
+        timer = nil
     }
     
     private func reloadData() {
@@ -167,7 +168,7 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
             //设置scrollView偏移位置
             scrollView.contentOffset = CGPoint(x: frame.width, y: 0)
         }
-
+        
     }
     // MARK: 停止滚动的时候回调
     public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
