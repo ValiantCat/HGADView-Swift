@@ -2,7 +2,7 @@
 Swift版轮播器
 
 
-专门为Swift写的轮播期   非常具有Swift的风格
+专门为Swift写的轮播器   非常具有Swift的风格
 
 1 到导入项目 将HGADView拖进项目即可  
 2 初始化  如下
