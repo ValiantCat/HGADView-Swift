@@ -24,6 +24,22 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
         }
         
     }
+    //   MARK: - 移除定时器
+    public func removeTimer() {
+        timer?.invalidate()
+        timer = nil
+        
+    }
+    //    MARK: - 添加定时器
+    public func addTimer() {
+        guard  images.count > 0 else  {return;}
+        timer = NSTimer(timeInterval: 2.5, target: self, selector: Selector("timerScrollImage"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+        NSRunLoop.currentRunLoop().runMode(UITrackingRunLoopMode, beforeDate: NSDate())
+        
+    }
+    
+    
     
     private var currentImageArray = [ImageType]()
     private var currentPage = 0
@@ -54,20 +70,7 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
         pageControl.pageIndicatorTintColor = UIColor.grayColor()
         return pageControl
     }()
-    //   MARK: - 移除定时器
-    public func removeTimer() {
-        timer?.invalidate()
-        timer = nil
-        
-    }
-    //    MARK: - 添加定时器
-    public func addTimer() {
-        if images.count <= 0 {return;}
-        timer = NSTimer(timeInterval: 2.5, target: self, selector: Selector("timerScrollImage"), userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
-        NSRunLoop.currentRunLoop().runMode(UITrackingRunLoopMode, beforeDate: NSDate())
-        
-    }
+
     @objc private func timerScrollImage() {
         reloadData()
         scrollView.setContentOffset(CGPoint(x: frame.width * 2.0 , y: 0) , animated: true)
@@ -184,8 +187,6 @@ public class HGADView<ImageType>: UIView,UIScrollViewDelegate {
     }
     
 }
-
-
 
 
 
