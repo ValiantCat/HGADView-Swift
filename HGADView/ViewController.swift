@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+    var adView:HGADView<String>?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -18,17 +18,28 @@ class ViewController: UIViewController {
         let images = ["1","2","3"]
         adView.images = images
      
-        adView.imageDidClick = { index  in
+        adView.imageDidClick = { [unowned self] index  in
             print("第\(index)张图片被点击了")
             
         }
         adView.loadImage = { ( imageView:UIImageView,imageName:String) in
             imageView.image = UIImage(named: imageName)
-            // or  use Other Modules              
+//             or  use Other Modules
         }
+        self.adView = adView
+
     
     }
-    
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        adView?.addTimer()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        adView?.removeTimer()
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+
+    }
 }
 
